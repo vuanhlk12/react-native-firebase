@@ -1,5 +1,6 @@
-import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import database from '@react-native-firebase/database';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,11 +13,23 @@ const styles = StyleSheet.create({
 });
 
 const buttons = ['Reset', 'Init Position', 'Start', 'Stop'];
+const controlValueRef = database().ref('controlValue');
 
-export default function App() {
+export default function Control() {
+  const [stateCurrent, setStateCurrent] = useState('');
   const handleCLick = (value: string) => {
-    console.log('value', value);
+    controlValueRef.set(value);
   };
+
+  useEffect(() => {
+    controlValueRef.on('value', snapshot => {
+      const data = snapshot.val();
+      setStateCurrent(data);
+    });
+    return () => {
+      controlValueRef.off();
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -25,6 +38,7 @@ export default function App() {
           <Button title={value} onPress={() => handleCLick(value)} />
         </View>
       ))}
+      <Text style={{ marginTop: 16 }}>{`State Current: ${stateCurrent}`}</Text>
     </View>
   );
 }

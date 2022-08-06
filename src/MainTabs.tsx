@@ -2,23 +2,15 @@ import * as React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 import Control from './tabs/Control';
-
-const FirstRoute = () => <Control />;
-
-const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-);
-
-const ThirdRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673a11' }]} />
-);
+import Measure from './tabs/Measure';
+import Setting from './tabs/Setting';
 
 const initialLayout = { width: Dimensions.get('window').width };
 
 const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-  third: ThirdRoute,
+  first: Control,
+  second: Measure,
+  third: Setting,
 });
 
 const routes = [
