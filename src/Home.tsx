@@ -1,6 +1,6 @@
-import { Box } from 'native-base';
 import React from 'react';
+import MainTabs from './MainTabs';
 
 export default function Home() {
-  return <Box>Hello world</Box>;
+  return <MainTabs />;
 }

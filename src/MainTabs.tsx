@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, StatusBar } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import { SceneMap, TabView } from 'react-native-tab-view';
+import Control from './tabs/Control';
 
-const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
-);
+const FirstRoute = () => <Control />;
 
 const SecondRoute = () => (
   <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+);
+
+const ThirdRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#673a11' }]} />
 );
 
 const initialLayout = { width: Dimensions.get('window').width };
@@ -15,14 +18,17 @@ const initialLayout = { width: Dimensions.get('window').width };
 const renderScene = SceneMap({
   first: FirstRoute,
   second: SecondRoute,
+  third: ThirdRoute,
 });
 
-export default function TabViewExample() {
+const routes = [
+  { key: 'first', title: 'Control' },
+  { key: 'second', title: 'Measure' },
+  { key: 'third', title: 'Setting' },
+];
+
+export default function MainTabs() {
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
-  ]);
 
   return (
     <TabView
@@ -36,9 +42,7 @@ export default function TabViewExample() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: StatusBar.currentHeight,
-  },
+  container: {},
   scene: {
     flex: 1,
   },
