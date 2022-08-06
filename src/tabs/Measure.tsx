@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    backgroundColor: '#fff',
   },
   button: { padding: 4, borderRadius: 8 },
 });
@@ -30,7 +31,6 @@ export default function Measure() {
   useEffect(() => {
     measureValueRef.on('value', snapshot => {
       const data = snapshot.val();
-      console.log('data', data);
       setStateCurrent(data);
     });
     return () => {
@@ -42,7 +42,9 @@ export default function Measure() {
     <View style={styles.container}>
       {measures.map(value => (
         <View key={value} style={styles.button}>
-          <Text>{`${value}: ${stateCurrent[value]}`}</Text>
+          <Text
+            style={{ color: '#000' }}
+          >{`${value}: ${stateCurrent[value]}`}</Text>
         </View>
       ))}
     </View>

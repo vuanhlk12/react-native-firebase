@@ -7,7 +7,9 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "clean": "cd android && ./gradlew clean",
+    "release": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-native-firebase/app": "^15.2.0",

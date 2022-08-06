@@ -7,6 +7,7 @@ import { Button, StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    backgroundColor: '#fff',
   },
   button: { padding: 4, borderRadius: 8 },
 });
@@ -22,15 +23,13 @@ export default function Setting() {
     },
   });
   const onSubmit = (data: any) => {
-    console.log(data);
     settingValueRef.set(data);
   };
 
   useEffect(() => {
     settingValueRef.on('value', snapshot => {
       const data = snapshot.val();
-      console.log('data', data);
-      // reset(data);
+      reset(data);
     });
     return () => {
       settingValueRef.off();

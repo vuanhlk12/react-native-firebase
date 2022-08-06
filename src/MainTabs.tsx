@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 import Control from './tabs/Control';
 import Measure from './tabs/Measure';

@@ -14,7 +14,7 @@ import { StyleSheet, View } from 'react-native';
 import Home from './src/Home';
 
 const styles = StyleSheet.create({
-  container: { height: '100%' },
+  container: { height: '100%', backgroundColor: '#fff' },
 });
 
 const App = () => {

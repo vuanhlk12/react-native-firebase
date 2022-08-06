@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    backgroundColor: '#fff',
   },
   button: { width: '50%', padding: 4, borderRadius: 8 },
 });
@@ -38,7 +39,9 @@ export default function Control() {
           <Button title={value} onPress={() => handleCLick(value)} />
         </View>
       ))}
-      <Text style={{ marginTop: 16 }}>{`State Current: ${stateCurrent}`}</Text>
+      <Text
+        style={{ marginTop: 16, color: '#000' }}
+      >{`State Current: ${stateCurrent}`}</Text>
     </View>
   );
 }
