@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   button: { padding: 4, borderRadius: 8 },
 });
 
-const settingValueRef = database().ref('settingValue');
+const settingValueRef = database().ref('app/setting');
 export default function Setting() {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
