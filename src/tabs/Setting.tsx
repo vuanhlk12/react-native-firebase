@@ -1,5 +1,5 @@
 import database from '@react-native-firebase/database';
-import { Input } from 'native-base';
+import { Input, Text } from 'native-base';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, View } from 'react-native';
@@ -23,13 +23,23 @@ export default function Setting() {
     },
   });
   const onSubmit = (data: any) => {
-    settingValueRef.set(data);
+    settingValueRef.set({
+      DiameterWire: Number(data.DiameterWire),
+      Material: Number(data.Material),
+      NumberLayer: Number(data.NumberLayer),
+      Speed: Number(data.Speed),
+    });
   };
 
   useEffect(() => {
     settingValueRef.on('value', snapshot => {
       const data = snapshot.val();
-      reset(data);
+      reset({
+        DiameterWire: String(data.DiameterWire),
+        Material: String(data.Material),
+        NumberLayer: String(data.NumberLayer),
+        Speed: String(data.Speed),
+      });
     });
     return () => {
       settingValueRef.off();
@@ -38,6 +48,7 @@ export default function Setting() {
 
   return (
     <View style={styles.container}>
+      <Text>DiameterWire</Text>
       <Controller
         control={control}
         rules={{
@@ -49,12 +60,12 @@ export default function Setting() {
             onChangeText={onChange}
             placeholder="DiameterWire"
             value={value}
-            marginTop={4}
           />
         )}
         name="DiameterWire"
       />
 
+      <Text>Material</Text>
       <Controller
         control={control}
         rules={{
@@ -66,11 +77,11 @@ export default function Setting() {
             onChangeText={onChange}
             placeholder="Material"
             value={value}
-            marginTop={4}
           />
         )}
         name="Material"
       />
+      <Text>NumberLayer</Text>
       <Controller
         control={control}
         rules={{
@@ -82,11 +93,11 @@ export default function Setting() {
             onChangeText={onChange}
             placeholder="NumberLayer"
             value={value}
-            marginTop={4}
           />
         )}
         name="NumberLayer"
       />
+      <Text>Speed</Text>
       <Controller
         control={control}
         rules={{
@@ -98,7 +109,6 @@ export default function Setting() {
             onChangeText={onChange}
             placeholder="Speed"
             value={value}
-            marginTop={4}
             marginBottom={4}
           />
         )}

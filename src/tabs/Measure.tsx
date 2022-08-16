@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 });
 
 const measures = ['Layer', 'Radius', 'Rotation', 'Speed'];
-const measureValueRef = database().ref('measureValue');
+const measureValueRef = database().ref('measure');
 
 interface Measure {
   Layer: string;
@@ -31,7 +31,7 @@ export default function Measure() {
   useEffect(() => {
     measureValueRef.on('value', snapshot => {
       const data = snapshot.val();
-      setStateCurrent(data);
+      setStateCurrent(() => data);
     });
     return () => {
       measureValueRef.off();
@@ -44,7 +44,7 @@ export default function Measure() {
         <View key={value} style={styles.button}>
           <Text
             style={{ color: '#000' }}
-          >{`${value}: ${stateCurrent[value]}`}</Text>
+          >{`${value}: ${stateCurrent?.[value]}`}</Text>
         </View>
       ))}
     </View>

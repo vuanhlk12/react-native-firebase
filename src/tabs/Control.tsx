@@ -14,46 +14,39 @@ const styles = StyleSheet.create({
 });
 
 const buttons = ['Reset', 'Init Position', 'Start', 'Stop'];
-const controlValueRef = database().ref('controlValue');
 const appControlRef = database().ref('app/control');
 
 export default function Control() {
-  const [stateCurrent, setStateCurrent] = useState('');
-  const [appControl, setAppControl] = useState('');
+  const [appControl, setAppControl] = useState(0);
 
-  const handleCLick = (value: string) => {
+  const handleCLick = (value: number) => {
     appControlRef.set(value);
   };
 
   useEffect(() => {
-    controlValueRef.on('value', snapshot => {
-      const data = snapshot.val();
-      setStateCurrent(data);
-    });
     appControlRef.on('value', snapshot => {
       const data = snapshot.val();
-      setAppControl(data);
+      setAppControl(() => data);
     });
     return () => {
-      controlValueRef.off();
       appControlRef.off();
     };
   }, []);
 
   return (
     <View style={styles.container}>
-      {buttons.map(value => (
+      {buttons.map((value, index) => (
         <View key={value} style={styles.button}>
           <Button
-            color={value === appControl ? '#f00' : undefined}
+            color={index + 1 === appControl ? '#f00' : undefined}
             title={value}
-            onPress={() => handleCLick(value)}
+            onPress={() => handleCLick(index + 1)}
           />
         </View>
       ))}
-      <Text
-        style={{ marginTop: 16, color: '#000' }}
-      >{`Current State: ${stateCurrent}`}</Text>
+      <Text style={{ marginTop: 16, color: '#000' }}>{`Current State: ${
+        buttons[appControl - 1] ?? ''
+      }`}</Text>
     </View>
   );
 }
